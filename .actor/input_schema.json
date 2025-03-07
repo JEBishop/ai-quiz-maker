@@ -1,0 +1,21 @@
+{
+    "title": "AI Quiz Maker",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "topic": {
+            "title": "Topic",
+            "type": "string",
+            "description": "The topic to create a quiz for",
+            "editor": "textfield",
+            "prefill": "World War 2"
+        },
+        "OPENAI_API_KEY": {
+            "title": "OpenAI API Key",
+            "type": "string",
+            "description": "The API key to use for prompting ChatGPT.",
+            "editor": "textfield"
+        }
+    },
+    "required": ["topic"]
+}
