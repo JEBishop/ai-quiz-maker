@@ -2,7 +2,7 @@ import { tool } from '@langchain/core/tools';
 import wiki from 'wikipedia';
 import { z } from 'zod';
 import log from '@apify/log';
-import { Actor } from 'apify';
+import OpenAI from "openai";
 
 /**
  * This step is a bit arbitray, but it helps some of the older models to get the correct format.
@@ -71,14 +71,35 @@ const fetchWikiDetailsTool = tool(
   }
 );
 
+/**
+ * If there are no Wikipedia results, our agent will fallback to searching the web.
+ */
+const webSearchTool = tool(
+  async (input) => {
+    log.info('in search_query_tool');
+    log.info(JSON.stringify(input));
+    const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+
+    const completion = await client.chat.completions.create({
+      model: "gpt-4o-mini-search-preview",
+      messages: [{
+          "role": "user",
+          "content": input.topic,
+      }],
+    });
+    return JSON.stringify(completion.choices[0].message.content);
+  }, {
+    name: 'search_query_tool',
+    description: 'Search the web for news about a topic.',
+    schema: z.object({
+      topic: z.string().describe("The topic to search for news about")
+    })
+  }
+);
+
 export const agentTools = [
   extractTopicTool,
   fetchWikiSearchResultsTool,
-  fetchWikiDetailsTool
+  fetchWikiDetailsTool,
+  webSearchTool
 ];
-
-/**
- * let summary: wikiSummary; //sets the object as type wikiSummary
-        summary = await wiki.summary(arg);
-        console.log(summary);
- */
