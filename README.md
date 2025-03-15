@@ -1,65 +1,62 @@
-## Empty TypeScript template
+# Apify AI Agent Actor: Study Quiz Generator
 
-Start a new [web scraping](https://apify.com/web-scraping) project quickly and easily in TypeScript (Node.js) with our empty project template. It provides a basic structure for the Actor with [Apify SDK](https://docs.apify.com/sdk/js/) and allows you to easily add your own functionality.
+## Overview
+The **Study Quiz Generator** is an autonomous AI agent built on Apify that transforms user input into a structured study quiz. Given a user's request (e.g., "I need to study for a quiz about World War 2"), the agent extracts the core topic, scrapes relevant Wikipedia pages asynchronously, and generates a multi-difficulty quiz in various formats (Markdown, HTML, JSON).
 
-## Included features
+## Features
+- **Autonomous Topic Extraction**: The agent identifies key study topics from natural language input.
+- **Asynchronous Web Scraping**: Retrieves data from multiple Wikipedia pages simultaneously for efficiency.
+- **Intelligent Quiz Generation**: Constructs easy, medium, and hard questions based on extracted information.
+- **Multi-Format Output**: Outputs quizzes in Markdown, HTML, and structured JSON format for various use cases.
 
-- **[Apify SDK](https://docs.apify.com/sdk/js/)** - a toolkit for building [Actors](https://apify.com/actors)
-- **[Crawlee](https://crawlee.dev/)** - web scraping and browser automation library
+## Workflow
+1. **User Input Processing**: The AI agent processes a free-text request to determine the main study topic.
+2. **Web Scraping**: Asynchronously scrapes Wikipedia pages relevant to the extracted topic.
+3. **Content Analysis**: Extracts key facts, events, and figures, organizing them into a structured knowledge base.
+4. **Question Generation**: Creates quiz questions of varying difficulty levels.
+5. **Multi-Format Export**: Outputs the quiz in Markdown (for readability), HTML (for web integration), and JSON (for programmatic use).
 
-## How it works
+## How to Use
+1. Deploy the Apify AI agent on the Apify platform.
+2. Provide a study request as input.
+3. The agent autonomously scrapes and processes data.
+4. Retrieve the generated quiz in your preferred format.
 
-Insert your own code between `await Actor.init()` and `await Actor.exit()`. If you would like to use the [Crawlee](https://crawlee.dev/) library simply uncomment its import `import { CheerioCrawler } from 'crawlee';`.
-
-## Resources
-
-- [TypeScript vs. JavaScript: which to use for web scraping?](https://blog.apify.com/typescript-vs-javascript-crawler/)
-- [Node.js tutorials](https://docs.apify.com/academy/node-js) in Academy
-- [Video guide on getting scraped data using Apify API](https://www.youtube.com/watch?v=ViYYDHSBAKM)
-- [Integration with Airbyte](https://apify.com/integrations), Make, Zapier, Google Drive, and other apps
-- A short guide on how to build web scrapers using code templates:
-
-[web scraper template](https://www.youtube.com/watch?v=u-i-Korzf8w)
-
-
-## Getting started
-
-For complete information [see this article](https://docs.apify.com/platform/actors/development#build-actor-locally). To run the actor use the following command:
-
-```bash
-apify run
+## Example Input
+```json
+"I need to study for a quiz about World War 2"
 ```
 
-## Deploy to Apify
+## Example Output Format
+```json
+{
+  "markdown": "# World War 2 Quiz\n## Easy\n- What year did World War 2 start?\n\n## Medium\n- Which countries were part of the Axis powers?\n\n## Hard\n- What was Operation Barbarossa?",
+  "html": "<h1>World War 2 Quiz</h1><h2>Easy</h2><ul><li>What year did World War 2 start?</li></ul><h2>Medium</h2><ul><li>Which countries were part of the Axis powers?</li></ul><h2>Hard</h2><ul><li>What was Operation Barbarossa?</li></ul>",
+  "json": {
+    "easy": [
+        {
+            "question": "What year did World War 2 start?",
+            "answers": ["1939", "1940", "1941", "1942"]
+        }
+        // 5 questions
+    ],
+    "medium": [
+        {
+            "question": "Which countries were part of the Axis powers?",
+            "answers": ["Germany", "Italy", "Japan", "Hungary"]
+        }
+        // 5 questions
+    ],
+    "hard": [
+        {
+            "question": "What was Operation Barbarossa?",
+            "answers": ["The German invasion of the Soviet Union"]
+        }
+        // 5 questions
+    ]
+  }
+}
+```
 
-### Connect Git repository to Apify
+This AI agent autonomously handles the entire study quiz generation process, making it a powerful tool for students, educators, and self-learners!
 
-If you've created a Git repository for the project, you can easily connect to Apify:
-
-1. Go to [Actor creation page](https://console.apify.com/actors/new)
-2. Click on **Link Git Repository** button
-
-### Push project on your local machine to Apify
-
-You can also deploy the project on your local machine to Apify without the need for the Git repository.
-
-1. Log in to Apify. You will need to provide your [Apify API Token](https://console.apify.com/account/integrations) to complete this action.
-
-    ```bash
-    apify login
-    ```
-
-2. Deploy your Actor. This command will deploy and build the Actor on the Apify Platform. You can find your newly created Actor under [Actors -> My Actors](https://console.apify.com/actors?tab=my).
-
-    ```bash
-    apify push
-    ```
-
-## Documentation reference
-
-To learn more about Apify and Actors, take a look at the following resources:
-
-- [Apify SDK for JavaScript documentation](https://docs.apify.com/sdk/js)
-- [Apify SDK for Python documentation](https://docs.apify.com/sdk/python)
-- [Apify Platform documentation](https://docs.apify.com/platform)
-- [Join our developer community on Discord](https://discord.com/invite/jyEM2PRvMU)
