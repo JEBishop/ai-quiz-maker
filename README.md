@@ -60,5 +60,6 @@ The **Study Quiz Generator** is an autonomous AI agent built on Apify that trans
 ```
 
 ![Sample output HTML](html_quiz.png)
+
 This AI agent autonomously handles the entire study quiz generation process, making it a powerful tool for students, educators, and self-learners!
 
