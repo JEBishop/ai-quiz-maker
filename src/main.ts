@@ -3,11 +3,12 @@ import log from '@apify/log';
 import { ChatOpenAI } from "@langchain/openai";
 import { HumanMessage } from "@langchain/core/messages";
 import { createReactAgent } from "@langchain/langgraph/prebuilt";
-import type { Input, Output } from './types.js'
+import type { Input, Quiz, Output } from './types.js'
 import { responseSchema } from './types.js'
 import { agentTools } from './tools.js'
 import { setContextVariable } from "@langchain/core/context";
 import { RunnableLambda } from "@langchain/core/runnables";
+import { formatMarkdown, formatHtml } from './utils.js';
 
 await Actor.init();
 
@@ -65,15 +66,20 @@ try {
       }, {
         recursionLimit: 20
       });
-      return modelResponse.structuredResponse as Output;
+      return modelResponse.structuredResponse as Quiz;
     }
   );
 
-  const output: Output = await handleRunTimeRequestRunnable.invoke({ topic: topic });
+  const output: Quiz = await handleRunTimeRequestRunnable.invoke({ topic: topic });
+  const formattedOutput: Output = {
+    markdown: formatMarkdown(output),
+    html: formatHtml(output),
+    json: output
+  }
 
   log.info(JSON.stringify(output));
 
-  await Actor.pushData(output);
+  await Actor.pushData(formattedOutput);
 } catch (err: any) {
   log.error(err.message);
   await Actor.pushData({ error: err.message });

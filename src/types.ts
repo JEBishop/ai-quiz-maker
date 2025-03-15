@@ -3,10 +3,16 @@ export interface Input {
   OPENAI_API_KEY: string;
 }
 
-export interface Output {
+export interface Quiz {
   easy: Question[];
   medium: Question[];
   hard: Question[];
+}
+
+export interface Output {
+  markdown: string;
+  html: string;
+  json: Quiz;
 }
 
 interface Question {
