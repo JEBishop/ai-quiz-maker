@@ -71,15 +71,13 @@ try {
   );
 
   const output: Quiz = await handleRunTimeRequestRunnable.invoke({ topic: topic });
-  const formattedOutput: Output = {
-    markdown: formatMarkdown(output),
-    html: formatHtml(output),
-    json: output
-  }
+
+  await Actor.setValue('quiz.html', formatHtml(output), { contentType: 'text/html' });
+  await Actor.setValue('quiz.md', formatMarkdown(output), { contentType: 'text/markdown' });
 
   log.info(JSON.stringify(output));
 
-  await Actor.pushData(formattedOutput);
+  await Actor.pushData(output);
 } catch (err: any) {
   log.error(err.message);
   await Actor.pushData({ error: err.message });

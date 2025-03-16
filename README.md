@@ -27,13 +27,12 @@ The **Study Quiz Generator** is an autonomous AI agent built on Apify that trans
 ```json
 "I need to study for a quiz about World War 2"
 ```
+## Output
+### Be sure to check the "Storage > Key-value store output tab for the HTML/MD report files.
 
 ## Example Output Format
 ```json
 {
-  "markdown": "# World War 2 Quiz\n## Easy\n- What year did World War 2 start?\n\n## Medium\n- Which countries were part of the Axis powers?\n\n## Hard\n- What was Operation Barbarossa?",
-  "html": "<h1>World War 2 Quiz</h1><h2>Easy</h2><ul><li>What year did World War 2 start?</li></ul><h2>Medium</h2><ul><li>Which countries were part of the Axis powers?</li></ul><h2>Hard</h2><ul><li>What was Operation Barbarossa?</li></ul>",
-  "json": {
     "easy": [
         {
             "question": "What year did World War 2 start?",
@@ -55,7 +54,6 @@ The **Study Quiz Generator** is an autonomous AI agent built on Apify that trans
         }
         // 5 questions
     ]
-  }
 }
 ```
 
