@@ -10,7 +10,7 @@ The **Study Quiz Generator** is an autonomous AI agent built on Apify that trans
 - **Multi-Format Output**: Outputs quizzes in Markdown, HTML, and structured JSON format for various use cases.
 
 ## Workflow
-![Workflow Diagram](agent_flow.png)
+![Workflow Diagram](https://raw.githubusercontent.com/JEBishop/ai-quiz-maker/main/agent_flow.png)
 1. **User Input Processing**: The AI agent processes a free-text request to determine the main study topic.
 2. **Web Scraping**: Asynchronously scrapes Wikipedia pages relevant to the extracted topic.
 3. **Content Analysis**: Extracts key facts, events, and figures, organizing them into a structured knowledge base.
@@ -57,7 +57,7 @@ The **Study Quiz Generator** is an autonomous AI agent built on Apify that trans
 }
 ```
 
-![Sample output HTML](html_quiz.png)
+![Sample output HTML](https://raw.githubusercontent.com/JEBishop/ai-quiz-maker/main/html_quiz.png)
 
 This AI agent autonomously handles the entire study quiz generation process, making it a powerful tool for students, educators, and self-learners!
 
